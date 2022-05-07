@@ -570,6 +570,13 @@ public:
     virtual void OnCreatureRemoveWorld(Creature* /*creature*/) { }
 
     /**
+     * @brief This hook runs after creature has been saved to DB
+     *
+     * @param creature Contains information about the Creature
+    */
+     virtual void OnCreatureSaveToDB(Creature* /*creature*/) { }
+
+    /**
      * @brief This hook called when a player opens a gossip dialog with the creature.
      *
      * @param player Contains information about the Player
@@ -651,7 +658,12 @@ public:
      * @param go Contains information about the GameObject
      */
     virtual void OnGameObjectAddWorld(GameObject* /*go*/) { }
-
+    /**
+     * @brief This hook runs after the game object iis saved to the database
+     *
+     * @param go Contains information about the GameObject
+     */
+    virtual void OnGameObjectSaveToDB(GameObject* /*go*/) { }
     /**
      * @brief This hook runs after remove game object in world
      *
@@ -2410,7 +2422,11 @@ public: /* AllCreatureScript */
     //listener function (OnAllCreatureUpdate) is called by OnCreatureUpdate
     //void OnAllCreatureUpdate(Creature* creature, uint32 diff);
     void Creature_SelectLevel(const CreatureTemplate* cinfo, Creature* creature);
+    void OnCreatureSaveToDB(Creature* creature);
     bool OnBeforeCreatureUpdate(Creature* /*creature*/, uint32 /*diff*/);
+
+public: /* AllGameobjectScript */
+    void OnGameObjectSaveToDB(GameObject* go);
 
 public: /* AllMapScript */
     void OnBeforeCreateInstanceScript(InstanceMap* instanceMap, InstanceScript* instanceData, bool load, std::string data, uint32 completedEncounterMask);
